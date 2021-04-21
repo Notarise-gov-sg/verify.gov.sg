@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import React, { ButtonHTMLAttributes, FunctionComponent } from "react";
+import DownloadIcon from "./shared/images/download-button.svg";
 
 const InnerButtonIcon = styled.button`
   width: 40px;
@@ -43,6 +44,7 @@ interface TabsProps {
   selectedTemplate: string;
   onSelectTemplate: (id: string) => void;
   onPrint: () => void;
+  onDownload: () => void;
 }
 
 export const Tabs: React.FunctionComponent<TabsProps> = ({
@@ -50,6 +52,7 @@ export const Tabs: React.FunctionComponent<TabsProps> = ({
   templates,
   onSelectTemplate,
   onPrint,
+  onDownload,
 }) => {
   return (
     <nav className="flex justify-between">
@@ -73,23 +76,31 @@ export const Tabs: React.FunctionComponent<TabsProps> = ({
         ))}
       </ul>
 
-      <ButtonIcon aria-label="document-utility-print-button" onClick={onPrint}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <polyline points="6 9 6 2 18 2 18 9" />
-          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
-          <rect x="6" y="14" width="12" height="8" />
-        </svg>
-      </ButtonIcon>
+      <div className="flex flex-row space-x-3 ">
+        <ButtonIcon aria-label="document-utility-print-button" onClick={onPrint}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <polyline points="6 9 6 2 18 2 18 9" />
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+            <rect x="6" y="14" width="12" height="8" />
+          </svg>
+        </ButtonIcon>
+
+        {process.env.NODE_ENV !== "production" && (
+          <ButtonIcon onClick={onDownload}>
+            <img src={DownloadIcon} />
+          </ButtonIcon>
+        )}
+      </div>
     </nav>
   );
 };

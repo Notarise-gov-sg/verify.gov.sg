@@ -59,6 +59,11 @@ export const DocumentRenderer: React.FunctionComponent<DocumentRendererProps> = 
     }
   }, [selectedTemplate, toFrame]);
 
+  const onDownload = () => {
+    if (toFrame == null) return;
+    (toFrame as any)({ type: "DOWNLOAD_PDF" }); // pending the publication of the forked branch
+  };
+
   return (
     <div className="mb-8">
       {templates.length > 0 && (
@@ -69,6 +74,7 @@ export const DocumentRenderer: React.FunctionComponent<DocumentRendererProps> = 
           onPrint={() => {
             toFrame?.(print());
           }}
+          onDownload={onDownload}
         />
       )}
       <FrameConnector
