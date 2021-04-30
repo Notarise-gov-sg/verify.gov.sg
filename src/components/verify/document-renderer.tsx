@@ -10,6 +10,7 @@ import {
 } from "@govtechsg/decentralized-renderer-react-components";
 import { getData, v2, WrappedDocument } from "@govtechsg/open-attestation";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { savePdf } from "../../services/save-pdf";
 import { Tabs } from "../tabs";
 
 interface DocumentRendererProps {
@@ -60,8 +61,9 @@ export const DocumentRenderer: React.FunctionComponent<DocumentRendererProps> = 
   }, [selectedTemplate, toFrame]);
 
   const onDownload = () => {
-    if (toFrame == null) return;
-    (toFrame as any)({ type: "DOWNLOAD_PDF" }); // pending the publication of the forked branch
+    const doc = window.document.querySelector("iframe")?.contentWindow?.document as HTMLDocument;
+    if (doc == null) return;
+    savePdf(doc);
   };
 
   return (
