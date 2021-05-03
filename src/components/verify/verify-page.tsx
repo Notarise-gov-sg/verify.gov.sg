@@ -242,7 +242,7 @@ export const VerifyPage: React.FunctionComponent = () => {
               />
             </div>
           </div>
-          {verificationStatus === Status.RESOLVED && rawDocument && <DocumentRenderer rawDocument={rawDocument} />}
+          {rawDocument && <DocumentRenderer rawDocument={rawDocument} />}
         </div>
       )}
     </Section>

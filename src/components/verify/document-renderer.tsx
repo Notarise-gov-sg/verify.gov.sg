@@ -61,9 +61,11 @@ export const DocumentRenderer: React.FunctionComponent<DocumentRendererProps> = 
   }, [selectedTemplate, toFrame]);
 
   const onDownload = () => {
-    const doc = window.document.querySelector("iframe")?.contentWindow?.document as HTMLDocument;
-    if (doc == null) return;
-    savePdf(doc);
+    // const iframe = window.document.querySelector("iframe") as HTMLIFrameElement ;
+    // const document = iframe.contentWindow!.document;
+    // savePdf(document);
+    if (toFrame == null) return;
+    toFrame({ type: "DOWNLOAD_PDF" });
   };
 
   return (
@@ -76,7 +78,7 @@ export const DocumentRenderer: React.FunctionComponent<DocumentRendererProps> = 
           onPrint={() => {
             toFrame?.(print());
           }}
-          onDownload={onDownload}
+          onDownload={() => onDownload()}
         />
       )}
       <FrameConnector
