@@ -10,7 +10,6 @@ import {
 } from "@govtechsg/decentralized-renderer-react-components";
 import { getData, v2, WrappedDocument } from "@govtechsg/open-attestation";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { savePdf } from "../../services/save-pdf";
 import { Tabs } from "../tabs";
 
 interface DocumentRendererProps {
